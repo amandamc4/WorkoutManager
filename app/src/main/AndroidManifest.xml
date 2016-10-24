@@ -15,6 +15,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:label="Add Day of Week"
+            android:name="com.example.amandajonathan.workoutmanager.AddDayWeek" >
+            <intent-filter >
+                <action android:name="com.example.amandajonathan.workoutmanager.AddDayWeek" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
