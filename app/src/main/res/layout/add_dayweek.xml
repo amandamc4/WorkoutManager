@@ -7,12 +7,14 @@
         android:id="@+id/daysWeek_spinner"
         android:layout_width="191dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="90dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/description"
-        android:text="Description" />
+        android:hint="Description" />
 
 </LinearLayout>
