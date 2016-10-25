@@ -20,6 +20,8 @@ public class AddDayWeek extends Activity {
 
     private String[] daysOfWeek;
     private Spinner dropdown;
+    public String weekDay;
+    public String description;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,22 +40,35 @@ public class AddDayWeek extends Activity {
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.v("item", (String) parent.getItemAtPosition(position));
+                //Log.v("item", (String) parent.getItemAtPosition(position));
+               int index =  parent.getSelectedItemPosition();
+                weekDay = daysOfWeek[index];
+                //Log.v("item", daysOfWeek[index]);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 // TODO Auto-generated method stub
             }
-        });
-
-        EditText description = (EditText) findViewById(R.id.description);
-
-        Intent addExercises = new Intent();
-
-        addExercises.putExtra( "description", description.getText().toString() );
-
+        }); // Closes onItemSelected
 
     } // closes onCreate
+
+    public void addExercises(View view) {
+
+        EditText descriptionEdit = (EditText) findViewById(R.id.descriptionText);
+        description = descriptionEdit.getText().toString();
+        Log.v("description", description);
+        Log.v("item", weekDay);
+
+        Intent addExercises = new Intent("com.example.amandajonathan.workoutmanager.AddExercises");
+
+        addExercises.putExtra( "weekday", weekDay );
+        addExercises.putExtra( "description", description );
+
+
+        startActivity( addExercises );
+
+    }
 
 }

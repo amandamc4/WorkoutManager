@@ -14,7 +14,16 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/description"
+        android:id="@+id/descriptionText"
         android:hint="Description" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Exercises"
+        android:id="@+id/addExercises"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="230dp"
+        android:onClick="addExercises"/>
 
 </LinearLayout>
