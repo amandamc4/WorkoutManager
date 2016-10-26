@@ -18,6 +18,7 @@
         android:text="Add Selected"
         android:id="@+id/addSelected"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"
+        android:onClick="addSelected"/>
 
 </LinearLayout>

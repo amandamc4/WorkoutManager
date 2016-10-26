@@ -33,6 +33,22 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:label="Web Api Connect"
+            android:name="com.example.amandajonathan.workoutmanager.WebApiConnect" >
+            <intent-filter >
+                <action android:name="com.example.amandajonathan.workoutmanager.WebApiConnect" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="Web Api Connect"
+            android:name="com.example.amandajonathan.workoutmanager.ExerciseInfo" >
+            <intent-filter >
+                <action android:name="com.example.amandajonathan.workoutmanager.ExerciseInfo" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

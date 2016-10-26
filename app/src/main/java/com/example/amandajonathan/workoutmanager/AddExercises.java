@@ -1,18 +1,11 @@
 package com.example.amandajonathan.workoutmanager;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.List;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.app.Activity;
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,108 +21,105 @@ import android.widget.CompoundButton;
 /**
  * Created by Amanda on 10/25/2016.
  */
-public class AddExercises extends Activity implements AdapterView.OnItemClickListener {
-    private TextView textView;
-    static final String API_URL = "https://wger.de/api/v2/exercise/?format=json&language=2";
+public class AddExercises extends Activity  {
+
     public String[] exerciseName;
-    public String exerciseDescription;
+    public String[] exerciseDescription;
+    public String[] exercisesSelected;
+
     private ExerciseListAddAdapter mAdapter;
     private boolean[] exerciseNameCheck;
     private ListView listView;
-
-    class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
-
-        private Exception exception;
-        protected String doInBackground(Void... urls) {
-
-            try {
-                URL url = new URL(API_URL);
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                try {
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                    StringBuilder stringBuilder = new StringBuilder();
-                    String line;
-                    while ((line = bufferedReader.readLine()) != null) {
-                        stringBuilder.append(line).append("\n");
-                    }
-                    bufferedReader.close();
-                    return stringBuilder.toString();
-                }
-                finally{
-                    urlConnection.disconnect();
-                }
-            }
-            catch(Exception e) {
-                Log.e("ERROR", e.getMessage(), e);
-                return null;
-            }
-        }
-
-        protected void onPostExecute(String response) {
-            if(response == null) {
-                response = "THERE WAS AN ERROR";
-            }
-
-            //Log.i("INFO", response);
-            //textView = (TextView) findViewById(R.id.responseView);
-            //textView.setText(response);
-
-            try {
-                JSONObject jsonObject = new JSONObject( response );
-                JSONArray jsonArray = jsonObject.getJSONArray( "results" );
-
-                exerciseName =  new String[jsonArray.length()];
-
-                Log.i("INFO", jsonArray.toString());
-
-                for (int i = 0; i < jsonArray.length(); i++) {
-
-                    JSONObject jsonObject2 = jsonArray.getJSONObject(i);
-
-                    exerciseName[i] = jsonObject2.getString("name");
-                    exerciseDescription = jsonObject2.getString("description");
-
-                    Log.d( "JSON", exerciseName[i] );
-                    Log.d( "JSON", exerciseDescription);
-
-                } // end for
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            exerciseNameCheck = new boolean[exerciseName.length];
-            mAdapter = new ExerciseListAddAdapter();
-
-            listView = (ListView) findViewById(R.id.addExercises);
-            listView.setAdapter(mAdapter);
-            //listView.setOnItemClickListener(this);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-
-                    Log.d("list clicked", exerciseName[position]);
-
-                }
-            });
-
-        } //closes onPostExecute Function
-    } // closes RetrieveFeedTask class
-
-
+    private int request_Code = 1;
+    private String weekDay;
+    private String workoutDescription;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_exercises);
 
-        new RetrieveFeedTask().execute();
+        Intent intent = getIntent();
+        weekDay = intent.getStringExtra("weekday");
+        workoutDescription = intent.getStringExtra("description");
+        startActivityForResult( new Intent( "com.example.amandajonathan.workoutmanager.WebApiConnect" ), request_Code );
 
     } // close onCreate
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("List clicked", exerciseName[position]);
+    public void onActivityResult( int requestCode, int resultCode, Intent data ){
+
+        if (requestCode == request_Code) {
+            if (resultCode == RESULT_OK) {
+
+                String result = data.getStringExtra( "response" );
+
+                try {
+                    JSONObject jsonObject = new JSONObject( result );
+                    JSONArray jsonArray = jsonObject.getJSONArray( "results" );
+
+                    exerciseName =  new String[jsonArray.length()];
+                    exerciseDescription =  new String[jsonArray.length()];
+                    //Log.i("INFO", jsonArray.toString());
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+
+                        JSONObject jsonObject2 = jsonArray.getJSONObject(i);
+
+                        exerciseName[i] = jsonObject2.getString("name");
+                        exerciseDescription[i] = jsonObject2.getString("description");
+
+                        //Log.d( "JSON", exerciseName[i] );
+                        //Log.d( "JSON", exerciseDescription);
+                    } // end for
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                exerciseNameCheck = new boolean[exerciseName.length];
+                mAdapter = new ExerciseListAddAdapter();
+
+                listView = (ListView) findViewById(R.id.addExercises);
+                listView.setAdapter(mAdapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+
+                        Log.d("list clicked", exerciseName[position]);
+                        Intent exerciseInfo = new Intent("com.example.amandajonathan.workoutmanager.ExerciseInfo");
+                        exerciseInfo.putExtra("exerciseName", exerciseName[position]);
+                        exerciseInfo.putExtra("exerciseDescription", exerciseDescription[position]);
+                        startActivity(exerciseInfo);
+
+                    }
+                });
+            }
+        }
+    } // Closes onActivityResult
+
+    public void addSelected(View view) {
+        int j=0;
+        int count = 0;
+        for(int i=0; i<exerciseNameCheck.length; i++){
+            if(exerciseNameCheck[i] == true){
+                count ++;
+            }
+        }
+        exercisesSelected =  new String[count];
+        for(int i=0; i<exerciseNameCheck.length; i++){
+            if(exerciseNameCheck[i] == true){
+                exercisesSelected[j] = exerciseName[i];
+                j++;
+            }
+        }
+
+        Intent dataIntent;
+        //dataIntent.putExtra( "weekday", weekDay );
+        //dataIntent.putExtra( "workoutDescription", workoutDescription );
+
+        //startActivity( addExercises );
+
     }
+
 
     private static class ExercisesViewHolder {
         public CheckBox checks;
@@ -162,7 +152,7 @@ public class AddExercises extends Activity implements AdapterView.OnItemClickLis
                 holder = new ExercisesViewHolder();
                 holder.checks = (CheckBox) convertView.findViewById(R.id.checkBox1);
                 holder.checks.setOnCheckedChangeListener(mStarCheckedChanceChangeListener);
-                holder.name = (TextView) convertView.findViewById(R.id.exerciseName);
+                holder.name = (TextView) convertView.findViewById(R.id.exerciseNameLabel);
                 holder.position = position;
 
                 convertView.setTag(holder);
@@ -185,8 +175,19 @@ public class AddExercises extends Activity implements AdapterView.OnItemClickLis
             final int position = listView.getPositionForView(buttonView);
             if (position != ListView.INVALID_POSITION) {
                 exerciseNameCheck[position] = isChecked;
-                Log.d("position checked", exerciseName[position]);
+               // if(exerciseNameCheck[position] == true)
+                //Log.d("checked", exerciseName[position]);
+               // else
+                   // Log.d("unchecked", exerciseName[position]);
+
             }
+            //for(int i=0; i<exerciseNameCheck.length; i++){
+               // if(exerciseNameCheck[i] == true)
+                   // Log.d("checked", exerciseName[i]);
+                //else
+                   // Log.d("unchecked", exerciseName[i]);
+          //  }
+            //}
         }
     };
 

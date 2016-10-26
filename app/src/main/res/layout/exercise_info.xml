@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="223dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Exercise Name"
+        android:id="@+id/exerciseNameLabel"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textIsSelectable="false" />
+
+    <TextView
+        android:layout_width="315dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textViewName"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="18dp"
+        android:textAlignment="center"
+        android:textColor="#2940d3"
+        android:textSize="18dp"
+        android:text="Name" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Exercise Description"
+        android:id="@+id/textViewDescriptionLabel"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textIsSelectable="false" />
+
+    <TextView
+        android:layout_width="309dp"
+        android:layout_height="match_parent"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textViewDescription"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="18dp"
+        android:textAlignment="center"
+        android:textColor="#2940d3"
+        android:textSize="18dp"
+        android:text="Description" />
+
+
+</LinearLayout>
