@@ -49,6 +49,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:label="Web Api Connect"
+            android:name="com.example.amandajonathan.workoutmanager.EditWorkout" >
+            <intent-filter >
+                <action android:name="com.example.amandajonathan.workoutmanager.EditWorkout" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
