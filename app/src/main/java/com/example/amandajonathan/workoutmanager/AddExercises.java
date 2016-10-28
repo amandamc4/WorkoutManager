@@ -121,7 +121,6 @@ public class AddExercises extends Activity  {
 
     }
 
-
     private static class ExercisesViewHolder {
         public CheckBox checks;
         public TextView name;
@@ -176,19 +175,7 @@ public class AddExercises extends Activity  {
             final int position = listView.getPositionForView(buttonView);
             if (position != ListView.INVALID_POSITION) {
                 exerciseNameCheck[position] = isChecked;
-               // if(exerciseNameCheck[position] == true)
-                //Log.d("checked", exerciseName[position]);
-               // else
-                   // Log.d("unchecked", exerciseName[position]);
-
             }
-            //for(int i=0; i<exerciseNameCheck.length; i++){
-               // if(exerciseNameCheck[i] == true)
-                   // Log.d("checked", exerciseName[i]);
-                //else
-                   // Log.d("unchecked", exerciseName[i]);
-          //  }
-            //}
         }
     };
 

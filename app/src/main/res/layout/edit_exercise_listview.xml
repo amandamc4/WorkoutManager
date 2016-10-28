@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/exerciseName"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="+"
+        android:id="@+id/addReps"
+        android:layout_marginTop="20dp"
+        android:textSize="50dp"
+        android:onClick="addRep"
+        />
+
+    <EditText
+        android:id="@+id/reps"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:hint="Reps"
+        />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="-"
+        android:textSize="50dp"
+        android:id="@+id/subtractReps"
+        android:onClick="subtractRep"
+        />
+
+    <TextView
+        android:id="@+id/weightLabel"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:text="Weight"
+        />
+
+    <EditText
+        android:id="@+id/weight"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        />
+
+
+</LinearLayout>
