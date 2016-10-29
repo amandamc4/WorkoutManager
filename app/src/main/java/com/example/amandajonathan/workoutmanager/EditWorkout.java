@@ -46,6 +46,6 @@ public class EditWorkout extends Activity implements CustomButtonListener {
         View view = listView.getChildAt(position);*/
         int rep = Integer.parseInt(editText.getText().toString());
         rep = rep + value;
-        editText.setText(rep);
+        editText.setText(String.valueOf(rep));
     }
 }

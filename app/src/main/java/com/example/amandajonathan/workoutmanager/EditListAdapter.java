@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class EditListAdapter extends BaseAdapter {
 
-    public Double reps[];
+    public int reps[];
     public Double weights[];
     private String[] exerciseNames;
 
@@ -39,8 +39,12 @@ public class EditListAdapter extends BaseAdapter {
     public EditListAdapter(Context context, String[] exerciseNames) {
         this.context = context;
         this.exerciseNames = exerciseNames;
-        reps = new Double[exerciseNames.length];
+        reps = new int[exerciseNames.length];
         weights = new Double[exerciseNames.length];
+        for(int i=0; i<exerciseNames.length; i++){
+            reps[i] = 0;
+            weights[i] = 0.0;
+        }
     }
 
     public void setCustomButtonListener(CustomButtonListener customButtonListner)
@@ -88,8 +92,8 @@ public class EditListAdapter extends BaseAdapter {
         }
         try {
 
-            listViewHolder.reps.setText(reps[position].toString());
-            listViewHolder.weight.setText(weights[position].toString());
+            listViewHolder.reps.setText(String.valueOf(reps[position]));
+            listViewHolder.weight.setText(String.valueOf(weights[position]));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -99,7 +103,7 @@ public class EditListAdapter extends BaseAdapter {
             public void onClick(View v) {
                 if (customButtonListener != null) {
                     customButtonListener.onButtonClickListener(position, listViewHolder.reps, 1);
-                    (reps[position] = reps[position] + 1).toString();
+                    reps[position] = reps[position] + 1;
                 }
             }
         });
@@ -109,11 +113,11 @@ public class EditListAdapter extends BaseAdapter {
                 if (customButtonListener != null) {
                     customButtonListener.onButtonClickListener(position, listViewHolder.reps, -1);
                     if (reps[position] > 0)
-                        (reps[position] = reps[position] - 1).toString();
+                        reps[position] = reps[position] - 1;
                 }
             }
         });
-        listViewHolder.weight.addTextChangedListener(new TextWatcher() {
+        /*listViewHolder.weight.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
@@ -129,9 +133,10 @@ public class EditListAdapter extends BaseAdapter {
             }
             @Override
             public void afterTextChanged(Editable arg0) {
-                //weights[position] = arg0;
+                weights[position] = Double.parseDouble(arg0.toString());
+                listViewHolder.weight.setText(String.valueOf(weights[position]));
             }
-        });
+        });*/
 
         return row;
     }
