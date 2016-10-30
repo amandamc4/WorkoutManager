@@ -3,6 +3,7 @@ package com.example.amandajonathan.workoutmanager;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class EditListAdapter extends BaseAdapter {
         EditText reps ;
         Button subtractReps;
         EditText weight;
+        int ref;
     }
 
     public EditListAdapter(Context context, String[] exerciseNames) {
@@ -88,12 +90,14 @@ public class EditListAdapter extends BaseAdapter {
             listViewHolder = (EditListViewHolder) row.getTag();
         }
         {
+            listViewHolder.ref = position;
             listViewHolder.exerciseName.setText(exerciseNames[position]);
         }
         try {
 
             listViewHolder.reps.setText(String.valueOf(reps[position]));
             listViewHolder.weight.setText(String.valueOf(weights[position]));
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -117,12 +121,11 @@ public class EditListAdapter extends BaseAdapter {
                 }
             }
         });
-        /*listViewHolder.weight.addTextChangedListener(new TextWatcher() {
+        listViewHolder.weight.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
                 // TODO Auto-generated method stub
-
             }
 
             @Override
@@ -133,10 +136,16 @@ public class EditListAdapter extends BaseAdapter {
             }
             @Override
             public void afterTextChanged(Editable arg0) {
-                weights[position] = Double.parseDouble(arg0.toString());
-                listViewHolder.weight.setText(String.valueOf(weights[position]));
+               if(!arg0.toString().equals("")){
+                    weights[listViewHolder.ref] = Double.parseDouble(arg0.toString());
+               }
             }
-        });*/
+        });
+
+        for (int i=0; i<weights.length; i++){
+            Log.d("weights", weights[i].toString());
+        }
+
 
         return row;
     }
