@@ -3,6 +3,8 @@ package com.example.amandajonathan.workoutmanager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -10,7 +12,7 @@ import android.widget.TextView;
 /**
  * Created by Amanda on 10/26/2016.
  */
-public class EditWorkout extends Activity implements CustomButtonListener {
+public class EditWorkout extends Activity  {
 
     private String weekDay;
     private String workoutDescription;
@@ -35,17 +37,16 @@ public class EditWorkout extends Activity implements CustomButtonListener {
         listView = (ListView) findViewById(R.id.editExercises);
         listAdapter = new EditListAdapter(this,exercises);
         listView.setAdapter(listAdapter);
-        listAdapter.setCustomButtonListener(this);
 
 
     } // close onCreate
 
-    @Override
-    public void onButtonClickListener(int position, EditText editText, int value) {
-        /*
-        View view = listView.getChildAt(position);*/
-        int rep = Integer.parseInt(editText.getText().toString());
-        rep = rep + value;
-        editText.setText(String.valueOf(rep));
+    public void saveWorkout(View view) {
+
+        for (int i = 0; i < listAdapter.reps.length; i++) {
+            Log.d("Reps:", String.valueOf(listAdapter.reps[i]));
+            Log.d("Weight:", String.valueOf(listAdapter.weights[i]));
+        }
     }
+
 }

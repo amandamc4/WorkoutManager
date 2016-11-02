@@ -12,9 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 
 /**
  * Created by Amanda on 10/28/2016.
@@ -26,13 +23,13 @@ public class EditListAdapter extends BaseAdapter {
     private String[] exerciseNames;
 
     private Context context;
-    CustomButtonListener customButtonListener;
+
 
     public class EditListViewHolder {
 
         TextView exerciseName ;
         Button addReps;
-        EditText reps ;
+        EditText rep ;
         Button subtractReps;
         EditText weight;
         int ref;
@@ -49,10 +46,6 @@ public class EditListAdapter extends BaseAdapter {
         }
     }
 
-    public void setCustomButtonListener(CustomButtonListener customButtonListner)
-    {
-        this.customButtonListener = customButtonListner;
-    }
 
     @Override
     public int getCount() {
@@ -81,7 +74,7 @@ public class EditListAdapter extends BaseAdapter {
             listViewHolder = new EditListViewHolder();
             listViewHolder.exerciseName = (TextView) row.findViewById(R.id.exerciseName);
             listViewHolder.addReps = (Button) row.findViewById(R.id.addReps);
-            listViewHolder.reps = (EditText) row.findViewById(R.id.reps);
+            listViewHolder.rep = (EditText) row.findViewById(R.id.reps);
             listViewHolder.subtractReps = (Button) row.findViewById(R.id.subtractReps);
             listViewHolder.weight = (EditText) row.findViewById(R.id.weight);
             row.setTag(listViewHolder);
@@ -95,7 +88,7 @@ public class EditListAdapter extends BaseAdapter {
         }
         try {
 
-            listViewHolder.reps.setText(String.valueOf(reps[position]));
+            listViewHolder.rep.setText(String.valueOf(reps[position]));
             listViewHolder.weight.setText(String.valueOf(weights[position]));
 
 
@@ -105,21 +98,21 @@ public class EditListAdapter extends BaseAdapter {
         listViewHolder.addReps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (customButtonListener != null) {
-                    customButtonListener.onButtonClickListener(position, listViewHolder.reps, 1);
+
                     reps[position] = reps[position] + 1;
-                }
+                    listViewHolder.rep.setText(String.valueOf(reps[position]));
+
             }
         });
         listViewHolder.subtractReps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (customButtonListener != null) {
-                    customButtonListener.onButtonClickListener(position, listViewHolder.reps, -1);
+
                     if (reps[position] > 0)
                         reps[position] = reps[position] - 1;
+                    listViewHolder.rep.setText(String.valueOf(reps[position]));
                 }
-            }
+
         });
         listViewHolder.weight.addTextChangedListener(new TextWatcher() {
 
@@ -142,10 +135,26 @@ public class EditListAdapter extends BaseAdapter {
             }
         });
 
-        for (int i=0; i<weights.length; i++){
-            Log.d("weights", weights[i].toString());
-        }
+        listViewHolder.rep.addTextChangedListener(new TextWatcher() {
 
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+                // TODO Auto-generated method stub
+
+            }
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                if(!arg0.toString().equals("")){
+                    reps[listViewHolder.ref] = Integer.parseInt(arg0.toString());
+                }
+            }
+        });
 
         return row;
     }
