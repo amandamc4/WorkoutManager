@@ -4,14 +4,7 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/inputSearch"
-        android:layout_gravity="center_horizontal"
-        android:hint="Search"
-        android:layout_marginTop="20dp"
-        android:inputType="textVisiblePassword"/>
+
 
     <ListView
         android:id="@+id/addExercises"
