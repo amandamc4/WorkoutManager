@@ -98,20 +98,18 @@ public class EditListAdapter extends BaseAdapter {
         listViewHolder.addReps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                    reps[position] = reps[position] + 1;
-                    listViewHolder.rep.setText(String.valueOf(reps[position]));
-
+                reps[position] = reps[position] + 1;
+                listViewHolder.rep.setText(String.valueOf(reps[position]));
             }
         });
         listViewHolder.subtractReps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                    if (reps[position] > 0)
-                        reps[position] = reps[position] - 1;
-                    listViewHolder.rep.setText(String.valueOf(reps[position]));
+                if (reps[position] > 0){
+                    reps[position] = reps[position] - 1;
                 }
+                listViewHolder.rep.setText(String.valueOf(reps[position]));
+            }
 
         });
         listViewHolder.weight.addTextChangedListener(new TextWatcher() {
@@ -131,6 +129,9 @@ public class EditListAdapter extends BaseAdapter {
             public void afterTextChanged(Editable arg0) {
                if(!arg0.toString().equals("")){
                     weights[listViewHolder.ref] = Double.parseDouble(arg0.toString());
+                   if(weights[listViewHolder.ref] < 1){
+                       listViewHolder.weight.setError("Weight should be greater than 1");
+                   }
                }
             }
         });
@@ -152,6 +153,9 @@ public class EditListAdapter extends BaseAdapter {
             public void afterTextChanged(Editable arg0) {
                 if(!arg0.toString().equals("")){
                     reps[listViewHolder.ref] = Integer.parseInt(arg0.toString());
+                    if(reps[listViewHolder.ref] < 1){
+                        listViewHolder.rep.setError("Reps should be greater than 1");
+                    }
                 }
             }
         });

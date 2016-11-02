@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.BaseAdapter;
@@ -33,6 +34,7 @@ public class AddExercises extends Activity  {
     private int request_Code = 1;
     private String weekDay;
     private String workoutDescription;
+    EditText inputSearch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,7 @@ public class AddExercises extends Activity  {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                inputSearch = (EditText) findViewById(R.id.inputSearch);
                 exerciseNameCheck = new boolean[exerciseName.length];
                 mAdapter = new ExerciseListAddAdapter();
 
@@ -92,6 +95,7 @@ public class AddExercises extends Activity  {
 
                     }
                 });
+
             }
         }
     } // Closes onActivityResult
@@ -167,6 +171,8 @@ public class AddExercises extends Activity  {
 
             return convertView;
         } // closes getView
+
+
     } // closes ExerciseListAdapter Class
 
     private OnCheckedChangeListener mStarCheckedChanceChangeListener = new OnCheckedChangeListener() {

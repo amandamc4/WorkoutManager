@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 /**
  * Created by Amanda on 10/26/2016.
@@ -42,11 +44,39 @@ public class EditWorkout extends Activity  {
     } // close onCreate
 
     public void saveWorkout(View view) {
+        boolean isZeroRep = false;
+        boolean isZeroWeight = false;
+        String zeroReps = "";
+        String zeroWeights = "";
 
         for (int i = 0; i < listAdapter.reps.length; i++) {
             Log.d("Reps:", String.valueOf(listAdapter.reps[i]));
             Log.d("Weight:", String.valueOf(listAdapter.weights[i]));
+
+            if(listAdapter.reps[i] < 1){
+                isZeroRep = true;
+                zeroReps+= exercises[i] + ", ";
+            }
+            if(listAdapter.weights[i] < 1){
+                isZeroWeight = true;
+                zeroWeights+= exercises[i] + ", ";
+            }
+        } // close For
+
+        if(isZeroRep == true || isZeroWeight == true){
+
+            AlertDialog alertDialog = new AlertDialog.Builder(EditWorkout.this).create();
+            alertDialog.setTitle("Alert!");
+            alertDialog.setMessage("Values for reps and weights cannot be 0!\nPlease fix values for:\n" +
+                    "Reps: "+ zeroReps + "\n" + "Weight: " + zeroWeights);
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
         }
-    }
+    }//close saveWorkout
 
 }
