@@ -8,14 +8,10 @@ import java.util.Date;
 public class Exercise {
     private long id;
     private String exerciseName;
-    private String exerciseReps;
-    private double weight;
-    private String dayOfWeek;
-    private String createDate;
+    private String exerciseDescription;
 
-    public long getId() {
-        return id;
-    }
+
+    public long getId() {return id;}
 
     public void setId(long id) {
         this.id = id;
@@ -29,35 +25,10 @@ public class Exercise {
         this.exerciseName = exerciseName;
     }
 
-    public String getExerciseReps(){
-        return exerciseReps;
+    public String getExerciseDescription(){
+        return exerciseDescription;
     }
 
-    public void setExerciseReps(String exerciseReps){
-        this.exerciseReps = exerciseReps;
-    }
+    public void setExerciseDescription(String exerciseDescription){this.exerciseDescription = exerciseDescription;}
 
-    public double getWeight(){
-        return weight;
-    }
-
-    public void setWeight(double weight){
-        this.weight = weight;
-    }
-
-    public String getDayOfWeek(){
-        return dayOfWeek;
-    }
-
-    public void setDayOfWeek(String dayOfWeek){
-        this.dayOfWeek = dayOfWeek;
-    }
-
-    public String getCreateDate(){
-        return createDate;
-    }
-
-    public void setCreateDate(String createDate){
-        this.createDate = createDate;
-    }
 }

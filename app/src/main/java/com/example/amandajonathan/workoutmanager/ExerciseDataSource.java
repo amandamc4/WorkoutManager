@@ -6,9 +6,7 @@ package com.example.amandajonathan.workoutmanager;
 
 
 import java.util.ArrayList;
-
 import java.util.List;
-import java.util.Date;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -20,9 +18,8 @@ public class ExerciseDataSource {
     // Database fields
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
-    private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
-            MySQLiteHelper.COLUMN_EXENAME, MySQLiteHelper.COLUMN_REPS, MySQLiteHelper.COLUMN_WEIGHT,
-            MySQLiteHelper.COLUMN_DAYOFWEEK, MySQLiteHelper.COLUMN_CREATEDATE};
+    private String[] allColumns = { MySQLiteHelper.COLUMN_EXEID,
+            MySQLiteHelper.COLUMN_EXENAME, MySQLiteHelper.COLUMN_EXEDESCRIPTION};
 
     public ExerciseDataSource(Context context) {
         dbHelper = new MySQLiteHelper(context);
@@ -36,16 +33,18 @@ public class ExerciseDataSource {
         dbHelper.close();
     }
 
-    public Exercise createExercise(String exerciseName, String reps, double weight, String weekDay, String createdAt) {
+    public Exercise createExercise(String exerciseName, String exerciseDescription) {
         ContentValues values = new ContentValues();
+
+        exerciseDescription = exerciseDescription.replaceAll("\\<p>", "");
+        exerciseDescription = exerciseDescription.replaceAll("\\</p>", "");
+
         values.put(MySQLiteHelper.COLUMN_EXENAME, exerciseName);
-        values.put(MySQLiteHelper.COLUMN_REPS, reps);
-        values.put(MySQLiteHelper.COLUMN_WEIGHT, weight);
-        values.put(MySQLiteHelper.COLUMN_DAYOFWEEK, weekDay);
-        values.put(MySQLiteHelper.COLUMN_CREATEDATE, createdAt);
+        values.put(MySQLiteHelper.COLUMN_EXEDESCRIPTION, exerciseDescription);
+
         long insertId = database.insert(MySQLiteHelper.TABLE_EXERCISES, null, values);
         Cursor cursor = database.query(MySQLiteHelper.TABLE_EXERCISES,
-                allColumns, MySQLiteHelper.COLUMN_ID + " = " + insertId, null,
+                allColumns, MySQLiteHelper.COLUMN_EXEID + " = " + insertId, null,
                 null, null, null);
         cursor.moveToFirst();
         Exercise newExercise = cursorToExercise(cursor);
@@ -56,7 +55,7 @@ public class ExerciseDataSource {
     public void deleteExercise(Exercise exercise) {
         long id = exercise.getId();
         System.out.println("Comment deleted with id: " + id);
-        database.delete(MySQLiteHelper.TABLE_EXERCISES, MySQLiteHelper.COLUMN_ID
+        database.delete(MySQLiteHelper.TABLE_EXERCISES, MySQLiteHelper.COLUMN_EXEID
                 + " = " + id, null);
     }
 
@@ -78,16 +77,11 @@ public class ExerciseDataSource {
     }
 
 
-
-
     private Exercise cursorToExercise(Cursor cursor) {
         Exercise exercises = new Exercise();
         exercises.setId(cursor.getLong(0));
         exercises.setExerciseName(cursor.getString(1));
-        exercises.setExerciseReps(cursor.getString(2));
-        exercises.setWeight(cursor.getDouble(3));
-        exercises.setDayOfWeek(cursor.getString(4));
-        exercises.setCreateDate(cursor.getString(5));
+        exercises.setExerciseDescription(cursor.getString(2));
         return exercises;
     }
 
