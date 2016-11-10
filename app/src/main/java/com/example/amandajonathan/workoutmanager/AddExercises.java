@@ -114,6 +114,7 @@ public class AddExercises extends Activity  {
             }
         }
 
+
         Intent editWorkout = new Intent("com.example.amandajonathan.workoutmanager.EditWorkout");
         editWorkout.putExtra( "weekday", weekDay );
         editWorkout.putExtra( "workoutDescription", workoutDescription );

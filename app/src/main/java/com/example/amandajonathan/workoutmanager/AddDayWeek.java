@@ -11,6 +11,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import static com.example.amandajonathan.workoutmanager.R.array.dayOfWeek;
 
 /**
@@ -22,6 +26,8 @@ public class AddDayWeek extends Activity {
     private Spinner dropdown;
     public String weekDay;
     public String description;
+    private int request_Code = 1;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,12 +42,12 @@ public class AddDayWeek extends Activity {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
-         dropdown.setAdapter(adapter);
-         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        dropdown.setAdapter(adapter);
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Log.v("item", (String) parent.getItemAtPosition(position));
-               int index =  parent.getSelectedItemPosition();
+                int index = parent.getSelectedItemPosition();
                 weekDay = daysOfWeek[index];
                 //Log.v("item", daysOfWeek[index]);
             }
@@ -51,6 +57,7 @@ public class AddDayWeek extends Activity {
                 // TODO Auto-generated method stub
             }
         }); // Closes onItemSelected
+
 
     } // closes onCreate
 
@@ -63,12 +70,16 @@ public class AddDayWeek extends Activity {
 
         Intent addExercises = new Intent("com.example.amandajonathan.workoutmanager.AddExercises");
 
-        addExercises.putExtra( "weekday", weekDay );
-        addExercises.putExtra( "description", description );
+        addExercises.putExtra("weekday", weekDay);
+        addExercises.putExtra("description", description);
 
 
-        startActivity( addExercises );
+        startActivity(addExercises);
 
     }
 
+
+
 }
+
+
