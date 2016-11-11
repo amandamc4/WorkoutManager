@@ -78,19 +78,25 @@ public class ExerciseDataSource {
 
     public long getExerciseByName(String name) {
 
+        long id = -1;
+
 //        String selectQuery = "SELECT _id FROM " + MySQLiteHelper.TABLE_EXERCISES + " e "
 //                + "WHERE e." + MySQLiteHelper.COLUMN_EXENAME.toLowerCase()
 //                + " = '" + name.toLowerCase() + "'";
 
-        String selectQuery = "SELECT _id FROM " + MySQLiteHelper.TABLE_EXERCISES + " e "
-                + "WHERE e." + MySQLiteHelper.COLUMN_EXENAME.toLowerCase()
-                + " = " + name.toLowerCase();
+        String selectQuery = "SELECT _id FROM " + MySQLiteHelper.TABLE_EXERCISES
+                + " WHERE " + MySQLiteHelper.COLUMN_EXENAME
+                + " =  '" + name + "'";
 
         Cursor cursor = database.rawQuery(selectQuery, null);
-        //cursor.moveToFirst();
+        if (cursor != null){
+            cursor.moveToFirst();
+            id = cursor.getLong(0);
+        }
+
 
         // make sure to close the cursor
-        long id = cursor.getLong(0);
+
         cursor.close();
         return id;
     }

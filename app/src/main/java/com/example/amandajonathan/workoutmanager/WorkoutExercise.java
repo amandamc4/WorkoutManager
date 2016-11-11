@@ -12,6 +12,7 @@ public class WorkoutExercise {
     private String exerciseName;
     private String workoutDay;
     private String workoutDescription;
+    private String createDate;
 
     public long getId() {return id;}
 
@@ -64,5 +65,9 @@ public class WorkoutExercise {
     }
 
     public void setWorkoutDescription(String workoutDescription){this.workoutDescription = workoutDescription;}
+
+    public String getCreateDate() {return createDate; }
+
+    public void setCreateDate(String createDate) { this.createDate = createDate; }
 
 }

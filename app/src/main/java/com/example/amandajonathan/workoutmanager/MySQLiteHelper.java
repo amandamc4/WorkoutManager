@@ -38,6 +38,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_WEIGHT = "weight";
 
 
+
     //CREATE TABLE EXERCISE STATEMENT
     private static final String DATABASE_CREATE_EXERCISE = "CREATE TABLE "
             + TABLE_EXERCISES + "( " + COLUMN_EXEID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -57,11 +58,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             + COLUMN_EXERID + " INTEGER NOT NULL, "
             + COLUMN_WORKID + " INTEGER NOT NULL, "
             + COLUMN_REPS + " TEXT NOT NULL, "
-            + COLUMN_WEIGHT + " DOUBLE " + " );";
+            + COLUMN_WEIGHT + " DOUBLE "
+            + COLUMN_EXENAME + " TEXT NOT NULL, "
+            + COLUMN_DAYOFWEEK + " TEXT NOT NULL, "
+            + COLUMN_WORKOUTDESCRIPTION + " TEXT, "
+            + COLUMN_CREATEDATE + " TEXT NOT NULL " + " );";
 
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase database) {

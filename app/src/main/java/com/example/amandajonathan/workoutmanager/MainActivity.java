@@ -3,19 +3,15 @@ package com.example.amandajonathan.workoutmanager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public String[] exerciseName;
     public String[] exerciseDescription;
-    private ExerciseDataSource datasource;
-    private int request_Code = 1;
+    //private ExerciseDataSource datasource;
+    //private int request_Code = 1;
+    private WorkoutExerciseDataSource ds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
         //startActivityForResult(new Intent("com.example.amandajonathan.workoutmanager.WebApiConnect"), request_Code);
 
-//        List<Exercise> values = datasource.getAllExercises();
-//        for(int i=0; i<values.size(); i++){String exename = values.get(i).getExerciseName();
-//            Log.d("exercie", exename);
-//        }
     }
 
     public void onClick(View view) {
@@ -72,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 //                } catch (JSONException e) {
 //                    e.printStackTrace();
 //                }
-//
+
 //                List<Exercise> values = datasource.getAllExercises();
 //                for(int i=0; i<values.size(); i++){
 //                    String exename = values.get(i).getExerciseName();
@@ -80,5 +72,5 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //            }
 //        }
-    //}
+//    }
 }
