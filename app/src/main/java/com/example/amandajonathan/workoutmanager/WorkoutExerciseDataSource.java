@@ -66,6 +66,27 @@ public class WorkoutExerciseDataSource {
         return newWorkout;
     }
 
+    public List<WorkoutExercise> getAllExercisesByDayOfWeek(String dayWeek) {
+        List<WorkoutExercise> workouts = new ArrayList<WorkoutExercise>();
+
+        String selectQuery = "SELECT * FROM " + MySQLiteHelper.TABLE_WORKOUTEXERCISE
+                + " WHERE " + MySQLiteHelper.COLUMN_DAYOFWEEK
+                + " =  '" + dayWeek + "'";
+
+        Cursor cursor = database.rawQuery(selectQuery, null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                WorkoutExercise exercise = cursorToWorkoutExercise(cursor);
+                workouts.add(exercise);
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        return workouts;
+    }
+
 
 //    private WorkoutExercise cursorToWorkoutExercise(Cursor cursor) {
 //        WorkoutExercise workoutExercise = new WorkoutExercise();
