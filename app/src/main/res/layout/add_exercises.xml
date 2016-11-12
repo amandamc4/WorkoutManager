@@ -5,18 +5,12 @@
     android:weightSum="1">
 
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/search"
-        android:layout_gravity="center_horizontal" />
-
     <ListView
         android:id="@+id/addExercises"
         android:layout_width="match_parent"
         android:layout_height="308dp"
         android:layout_marginTop="30dp"
-        android:layout_weight="0.52" />
+        android:layout_weight="0.46" />
 
     <Button
         android:layout_width="165dp"

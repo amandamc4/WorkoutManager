@@ -16,11 +16,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Filterable;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.CompoundButton;
+import android.widget.Filter;
 
 import java.util.ArrayList;
 
@@ -33,17 +36,12 @@ public class AddExercises extends Activity  {
     public String[] exerciseDescription;
     public String[] exercisesSelected;
 
-    //testing search
-    public ArrayList<String>exerciseName2;
-    public ArrayList<String>exerciseDescription2;
-
     private ExerciseListAddAdapter mAdapter;
     private boolean[] exerciseNameCheck;
     private ListView listView;
     private int request_Code = 1;
     private String weekDay;
     private String workoutDescription;
-    private EditText editSearch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,9 +51,6 @@ public class AddExercises extends Activity  {
         Intent intent = getIntent();
         weekDay = intent.getStringExtra("weekday");
         workoutDescription = intent.getStringExtra("description");
-        editSearch = (EditText)findViewById(R.id.search);
-        exerciseName2 = new ArrayList<>();
-        exerciseDescription2 = new ArrayList<>();
         startActivityForResult( new Intent( "com.example.amandajonathan.workoutmanager.WebApiConnect" ), request_Code );
 
     } // close onCreate
@@ -81,8 +76,6 @@ public class AddExercises extends Activity  {
 
                         exerciseName[i] = jsonObject2.getString("name");
                         exerciseDescription[i] = jsonObject2.getString("description");
-                        exerciseName2.add(jsonObject2.getString("name"));
-                        exerciseDescription2.add(jsonObject2.getString("description"));
 
                         //Log.d( "JSON", exerciseName[i] );
                         //Log.d( "JSON", exerciseDescription);
@@ -93,7 +86,7 @@ public class AddExercises extends Activity  {
                 }
 
                 exerciseNameCheck = new boolean[exerciseName.length];
-                mAdapter = new ExerciseListAddAdapter(exerciseName2);
+                mAdapter = new ExerciseListAddAdapter();
 
                 listView = (ListView) findViewById(R.id.addExercises);
                 listView.setAdapter(mAdapter);
@@ -110,40 +103,7 @@ public class AddExercises extends Activity  {
                     }
                 });
 
-                editSearch.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        String[] temp2;
-                        ArrayList<String> temp = new ArrayList<String>();
-                        int textLenght = editSearch.getText().length();
-                        temp.clear();
-                        for(int i=0; i<exerciseName2.size(); i++){
-                            if(textLenght <= exerciseName2.size()){
-                                if(editSearch.getText().toString().equalsIgnoreCase(String.valueOf(exerciseName2.get(i).subSequence(0, textLenght)))){
-                                    temp.add(exerciseName2.get(i));
-                                }
-                            }
-                        } // close for
-                        temp2 = new String[temp.size()];
-                        for(int i=0; i<temp.size(); i++){
-                            temp2[i] = temp.get(i);
-                        }
-
-                        listView.setAdapter(new ExerciseListAddAdapter(temp));
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-
-                    }
-                });
-
+                listView.setTextFilterEnabled(true);
             }
         }
     } // Closes onActivityResult
@@ -182,15 +142,9 @@ public class AddExercises extends Activity  {
 
     private class ExerciseListAddAdapter extends BaseAdapter {
 
-        ArrayList<String> exerciseName3 = new ArrayList<>();
-
-        public ExerciseListAddAdapter(ArrayList<String> exerciseName){
-            exerciseName3 = exerciseName;
-        }
-
-
         @Override
         public int getCount() {
+            //return exerciseName.length;
             return exerciseName.length;
         }
 
@@ -203,6 +157,7 @@ public class AddExercises extends Activity  {
         public long getItemId(int position) {
             return position;
         }
+
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ExercisesViewHolder holder = null;
@@ -223,23 +178,22 @@ public class AddExercises extends Activity  {
             holder.checks.setChecked(exerciseNameCheck[position]);
             holder.checks.setOnCheckedChangeListener(mStarCheckedChanceChangeListener);
 
-//            holder.name.setText(exerciseName[position]);
-            holder.name.setText(exerciseName3.get(position));
+            holder.name.setText(exerciseName[position]);
+
 
             return convertView;
         } // closes getView
 
-
     } // closes ExerciseListAdapter Class
 
-    private OnCheckedChangeListener mStarCheckedChanceChangeListener = new OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            final int position = listView.getPositionForView(buttonView);
-            if (position != ListView.INVALID_POSITION) {
-                exerciseNameCheck[position] = isChecked;
+        private OnCheckedChangeListener mStarCheckedChanceChangeListener = new OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                final int position = listView.getPositionForView(buttonView);
+                if (position != ListView.INVALID_POSITION) {
+                    exerciseNameCheck[position] = isChecked;
+                }
             }
-        }
-    };
+        };
 
 } // close AddExercises Class
