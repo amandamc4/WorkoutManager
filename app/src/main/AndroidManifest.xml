@@ -13,7 +13,6 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -42,7 +41,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:label="Web Api Connect"
+            android:label="Exercises Info"
             android:name="com.example.amandajonathan.workoutmanager.ExerciseInfo" >
             <intent-filter >
                 <action android:name="com.example.amandajonathan.workoutmanager.ExerciseInfo" />
@@ -50,18 +49,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:label="Web Api Connect"
+            android:label="Edit Workout"
             android:name="com.example.amandajonathan.workoutmanager.EditWorkout"
             android:windowSoftInputMode="adjustPan">
             <intent-filter >
                 <action android:name="com.example.amandajonathan.workoutmanager.EditWorkout" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+        </activity>
+        <activity
+            android:label="View Workout"
+            android:name="com.example.amandajonathan.workoutmanager.ViewWorkoutList"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter >
+                <action android:name="com.example.amandajonathan.workoutmanager.ViewWorkoutList" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

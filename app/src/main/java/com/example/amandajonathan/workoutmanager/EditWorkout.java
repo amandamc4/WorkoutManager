@@ -93,7 +93,52 @@ public class EditWorkout extends Activity {
                 workexedatasource.createWorkoutExercise(exeId, workout.getId(), String.valueOf(listAdapter.reps[i]), listAdapter.weights[i], exercises[i], workout.getWorkoutDay(), workout.getWorkoutDescription(), workout.getCreateDate());
             }
         }
+        Intent viewWorkout = new Intent("com.example.amandajonathan.workoutmanager.ViewWorkoutList");
+        viewWorkout.putExtra("weekday", weekDay );
+        startActivity(viewWorkout);
     }//close saveWorkout
+
+    public void addAnotherDay(View view) {
+        boolean isZeroRep = false;
+        String zeroReps = "";
+
+        for (int i = 0; i < listAdapter.reps.length; i++) {
+            Log.d("Reps:", String.valueOf(listAdapter.reps[i]));
+            Log.d("Weight:", String.valueOf(listAdapter.weights[i]));
+            if (listAdapter.reps[i] < 1) {
+                isZeroRep = true;
+                zeroReps += exercises[i] + ", ";
+            }
+        } // close For
+        if (isZeroRep == true) {
+
+            AlertDialog alertDialog = new AlertDialog.Builder(EditWorkout.this).create();
+            alertDialog.setTitle("Alert!");
+            alertDialog.setMessage("Values for reps cannot be 0!\nPlease fix values for:\n" +
+                    "Reps: " + zeroReps + "\n");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }
+        else{
+
+            Date date = new Date();
+            String dates = date.toString();
+            Workout workout = null;
+            workout = workdatasource.createWorkout(weekDay, workoutDescription,dates);
+
+            for(int i=0; i<exercises.length; i++){
+                long exeId = exedatasource.getExerciseByName(exercises[i]);
+                workexedatasource.createWorkoutExercise(exeId, workout.getId(), String.valueOf(listAdapter.reps[i]), listAdapter.weights[i], exercises[i], workout.getWorkoutDay(), workout.getWorkoutDescription(), workout.getCreateDate());
+            }
+        }
+        Intent addWeekDay = new Intent("com.example.amandajonathan.workoutmanager.AddDayWeek");
+        startActivity(addWeekDay);
+    }
 
 
 } //close Class

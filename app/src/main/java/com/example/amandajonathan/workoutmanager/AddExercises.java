@@ -5,18 +5,24 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.BaseAdapter;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.CompoundButton;
+
+import java.util.ArrayList;
 
 /**
  * Created by Amanda on 10/25/2016.
@@ -27,12 +33,17 @@ public class AddExercises extends Activity  {
     public String[] exerciseDescription;
     public String[] exercisesSelected;
 
+    //testing search
+    public ArrayList<String>exerciseName2;
+    public ArrayList<String>exerciseDescription2;
+
     private ExerciseListAddAdapter mAdapter;
     private boolean[] exerciseNameCheck;
     private ListView listView;
     private int request_Code = 1;
     private String weekDay;
     private String workoutDescription;
+    private EditText editSearch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +53,9 @@ public class AddExercises extends Activity  {
         Intent intent = getIntent();
         weekDay = intent.getStringExtra("weekday");
         workoutDescription = intent.getStringExtra("description");
+        editSearch = (EditText)findViewById(R.id.search);
+        exerciseName2 = new ArrayList<>();
+        exerciseDescription2 = new ArrayList<>();
         startActivityForResult( new Intent( "com.example.amandajonathan.workoutmanager.WebApiConnect" ), request_Code );
 
     } // close onCreate
@@ -67,6 +81,8 @@ public class AddExercises extends Activity  {
 
                         exerciseName[i] = jsonObject2.getString("name");
                         exerciseDescription[i] = jsonObject2.getString("description");
+                        exerciseName2.add(jsonObject2.getString("name"));
+                        exerciseDescription2.add(jsonObject2.getString("description"));
 
                         //Log.d( "JSON", exerciseName[i] );
                         //Log.d( "JSON", exerciseDescription);
@@ -77,7 +93,7 @@ public class AddExercises extends Activity  {
                 }
 
                 exerciseNameCheck = new boolean[exerciseName.length];
-                mAdapter = new ExerciseListAddAdapter();
+                mAdapter = new ExerciseListAddAdapter(exerciseName2);
 
                 listView = (ListView) findViewById(R.id.addExercises);
                 listView.setAdapter(mAdapter);
@@ -90,6 +106,40 @@ public class AddExercises extends Activity  {
                         exerciseInfo.putExtra("exerciseName", exerciseName[position]);
                         exerciseInfo.putExtra("exerciseDescription", exerciseDescription[position]);
                         startActivity(exerciseInfo);
+
+                    }
+                });
+
+                editSearch.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        String[] temp2;
+                        ArrayList<String> temp = new ArrayList<String>();
+                        int textLenght = editSearch.getText().length();
+                        temp.clear();
+                        for(int i=0; i<exerciseName2.size(); i++){
+                            if(textLenght <= exerciseName2.size()){
+                                if(editSearch.getText().toString().equalsIgnoreCase(String.valueOf(exerciseName2.get(i).subSequence(0, textLenght)))){
+                                    temp.add(exerciseName2.get(i));
+                                }
+                            }
+                        } // close for
+                        temp2 = new String[temp.size()];
+                        for(int i=0; i<temp.size(); i++){
+                            temp2[i] = temp.get(i);
+                        }
+
+                        listView.setAdapter(new ExerciseListAddAdapter(temp));
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
 
                     }
                 });
@@ -132,6 +182,13 @@ public class AddExercises extends Activity  {
 
     private class ExerciseListAddAdapter extends BaseAdapter {
 
+        ArrayList<String> exerciseName3 = new ArrayList<>();
+
+        public ExerciseListAddAdapter(ArrayList<String> exerciseName){
+            exerciseName3 = exerciseName;
+        }
+
+
         @Override
         public int getCount() {
             return exerciseName.length;
@@ -166,7 +223,8 @@ public class AddExercises extends Activity  {
             holder.checks.setChecked(exerciseNameCheck[position]);
             holder.checks.setOnCheckedChangeListener(mStarCheckedChanceChangeListener);
 
-            holder.name.setText(exerciseName[position]);
+//            holder.name.setText(exerciseName[position]);
+            holder.name.setText(exerciseName3.get(position));
 
             return convertView;
         } // closes getView

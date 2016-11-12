@@ -24,6 +24,14 @@ public class ViewExerciseListAdapter extends BaseAdapter {
     public String dayWeek;
     public String description;
 
+    public class WorkoutListViewHolder {
+
+        TextView exerciseName ;
+        TextView weight;
+        TextView reps;
+        int ref;
+    }
+
     public ViewExerciseListAdapter(Context context, List<WorkoutExercise> workouts) {
         this.context = context;
 
@@ -59,9 +67,33 @@ public class ViewExerciseListAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        View row;
+        final WorkoutListViewHolder listViewHolder;
+        if (convertView == null) {
+            LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            row = layoutInflater.inflate(R.layout.view_workout_listview, parent, false);
+            listViewHolder = new WorkoutListViewHolder();
+            listViewHolder.exerciseName = (TextView) row.findViewById(R.id.exerciseName);
+            listViewHolder.weight = (TextView) row.findViewById(R.id.weight);
+            listViewHolder.reps = (TextView) row.findViewById(R.id.reps);
+            row.setTag(listViewHolder);
+        }else {
+            row = convertView;
+            listViewHolder = (WorkoutListViewHolder) row.getTag();
+        }
+        listViewHolder.ref = position;
+        try {
 
-        return null;
-    }
+            listViewHolder.exerciseName.setText(exercises[position]);
+            listViewHolder.weight.setText(String.valueOf(weights[position]));
+            listViewHolder.reps.setText(reps[position]);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return row;
+    } // closes getView
 
 
 } // closes ViewExerciseListAdapter class

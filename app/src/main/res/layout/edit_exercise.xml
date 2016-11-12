@@ -23,10 +23,19 @@
         android:layout_weight="0.46" />
 
     <Button
+        android:id="@+id/addAnother"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add another Day"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:onClick="addAnotherDay"/>
+
+    <Button
         android:id="@+id/saveWorkout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save Workout Day"
+        android:text="Finish"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:onClick="saveWorkout"/>
