@@ -58,7 +58,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             + COLUMN_EXERID + " INTEGER NOT NULL, "
             + COLUMN_WORKID + " INTEGER NOT NULL, "
             + COLUMN_REPS + " TEXT NOT NULL, "
-            + COLUMN_WEIGHT + " DOUBLE "
+            + COLUMN_WEIGHT + " DOUBLE, "
             + COLUMN_EXENAME + " TEXT NOT NULL, "
             + COLUMN_DAYOFWEEK + " TEXT NOT NULL, "
             + COLUMN_WORKOUTDESCRIPTION + " TEXT, "
