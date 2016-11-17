@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ultimate Workout Manager</string>
+    <string name="app_name">Workout Manager</string>
     <string-array name="dayOfWeek">
         <item>Monday</item>
         <item>Tuesday</item>

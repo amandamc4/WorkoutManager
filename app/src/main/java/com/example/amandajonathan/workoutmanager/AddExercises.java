@@ -102,8 +102,6 @@ public class AddExercises extends Activity  {
 
                     }
                 });
-
-                listView.setTextFilterEnabled(true);
             }
         }
     } // Closes onActivityResult
