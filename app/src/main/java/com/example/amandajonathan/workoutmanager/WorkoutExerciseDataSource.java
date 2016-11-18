@@ -9,7 +9,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,14 +47,6 @@ public class WorkoutExerciseDataSource {
 
         long insertId = database.insert(MySQLiteHelper.TABLE_WORKOUTEXERCISE, null, values);
 
-//        String selectQuery = "SELECT  e.exercise_name,  w.day_week, w.workout_description, we.reps, we.weight FROM " + MySQLiteHelper.TABLE_EXERCISES + " e, "
-//                +  MySQLiteHelper.TABLE_WORKOUT + " w, " +  MySQLiteHelper.TABLE_WORKOUTEXERCISE + " we "
-//                + "WHERE e." + MySQLiteHelper.COLUMN_EXEID
-//                + " = " + "we." + MySQLiteHelper.COLUMN_EXERID + " AND w." + MySQLiteHelper.COLUMN_WORKOUTID + " = "
-//                + "we." + MySQLiteHelper.COLUMN_WORKID;
-//
-//        Cursor cursor = database.rawQuery(selectQuery, null);
-
         Cursor cursor = database.query(MySQLiteHelper.TABLE_WORKOUTEXERCISE,
                 allColumns, MySQLiteHelper.COLUMN_WORKOUTEXERCISEID + " = " + insertId, null,
                 null, null, null);
@@ -92,6 +83,13 @@ public class WorkoutExerciseDataSource {
                 + " = '" + week + "'", null);
     }
 
+    public void updateWorkoutExercise(String week, String reps, double weight, long exeId) {
+        ContentValues newValues = new ContentValues();
+        newValues.put(MySQLiteHelper.COLUMN_REPS, reps);
+        newValues.put(MySQLiteHelper.COLUMN_WEIGHT, weight);
+
+        database.update(MySQLiteHelper.TABLE_WORKOUTEXERCISE, newValues, "_exercise_id = " + exeId + " AND day_week = '" + week + "'", null);
+    }
 
 //    private WorkoutExercise cursorToWorkoutExercise(Cursor cursor) {
 //        WorkoutExercise workoutExercise = new WorkoutExercise();

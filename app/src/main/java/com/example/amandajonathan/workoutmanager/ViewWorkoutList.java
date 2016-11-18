@@ -1,6 +1,5 @@
 package com.example.amandajonathan.workoutmanager;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,11 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+
 
 /**
  * Created by Amanda on 11/11/2016.

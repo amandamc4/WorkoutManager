@@ -143,9 +143,6 @@ public class EditListAdapter extends BaseAdapter {
             public void afterTextChanged(Editable arg0) {
                if(!arg0.toString().equals("")){
                     weights[listViewHolder.ref] = Double.parseDouble(arg0.toString());
-                   if(weights[listViewHolder.ref] < 1){
-                       listViewHolder.weight.setError("Weight should be greater than 1");
-                   }
                }
             }
         });
