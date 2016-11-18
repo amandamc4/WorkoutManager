@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.List;
+
 
 /**
  * Created by Amanda on 10/28/2016.
@@ -43,6 +45,18 @@ public class EditListAdapter extends BaseAdapter {
         for(int i=0; i<exerciseNames.length; i++){
             reps[i] = 0;
             weights[i] = 0.0;
+        }
+    }
+    public EditListAdapter(Context context, List<WorkoutExercise> workout) {
+        this.context = context;
+        exerciseNames = new String[workout.size()];
+        reps = new int[workout.size()];
+        weights = new Double[workout.size()];
+
+        for(int i=0; i<workout.size(); i++){
+            exerciseNames[i] = workout.get(i).getExerciseName();
+            reps[i] = Integer.parseInt(workout.get(i).getReps());
+            weights[i] = workout.get(i).getWeight();
         }
     }
 

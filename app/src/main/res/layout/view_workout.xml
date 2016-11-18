@@ -4,27 +4,58 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Day of the week"
         android:id="@+id/dayWeek"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:textSize="25dp"
-        android:textAlignment="center" />
+        android:layout_marginLeft="5dp" />
+
+        <ImageButton
+            android:id="@+id/editWorkout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pencilicon"
+            android:onClick="editWorkout"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="120dp" />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
 
     <TextView
-        android:layout_width="222dp"
+        android:layout_width="171dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Description"
         android:id="@+id/description"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:layout_weight="0.09"
-        android:textAlignment="center" />
+        android:layout_marginLeft="5dp"
+        android:layout_weight="0.14" />
+
+        <ImageButton
+            android:id="@+id/deleteWorkout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/trashicon"
+            android:onClick="deleteWorkout"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="123dp" />
+
+    </LinearLayout>
 
     <ListView
         android:layout_width="match_parent"

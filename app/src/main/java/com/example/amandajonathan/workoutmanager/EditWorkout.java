@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Amanda on 10/26/2016.
@@ -24,6 +25,7 @@ public class EditWorkout extends Activity {
     private String[] exercises;
     private ListView listView;
     private EditListAdapter listAdapter;
+    List<WorkoutExercise> workouts;
 
 
     @Override
@@ -45,11 +47,24 @@ public class EditWorkout extends Activity {
         workoutDescription = intent.getStringExtra("workoutDescription");
         exercises = intent.getStringArrayExtra("exercisesSelected");
 
+        String isFromView = "";
+        isFromView = intent.getStringExtra("comingFromView");
+
         TextView textView = (TextView) findViewById(R.id.textViewWeekDay);
         textView.setText(weekDay);
 
         listView = (ListView) findViewById(R.id.editExercises);
-        listAdapter = new EditListAdapter(this, exercises);
+
+        if(isFromView != null){
+            if(isFromView.equalsIgnoreCase("yes")) {
+                workouts = workexedatasource.getAllExercisesByDayOfWeek(weekDay);
+                listAdapter = new EditListAdapter(this, workouts);
+            }
+        }
+        else{
+            listAdapter = new EditListAdapter(this, exercises);
+        }
+
         listView.setAdapter(listAdapter);
 
     } // close onCreate

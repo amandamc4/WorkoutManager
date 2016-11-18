@@ -50,11 +50,16 @@ public class WorkoutDataSource {
 
     } // create workout
 
-    public void deleteWorkout(Workout workout) {
-        long id = workout.getId();
-        System.out.println("Comment deleted with id: " + id);
-        database.delete(MySQLiteHelper.TABLE_WORKOUT, MySQLiteHelper.COLUMN_WORKOUTID
-                + " = " + id, null);
+//    public void deleteWorkout(Workout workout) {
+//        long id = workout.getId();
+//        System.out.println("Comment deleted with id: " + id);
+//        database.delete(MySQLiteHelper.TABLE_WORKOUT, MySQLiteHelper.COLUMN_WORKOUTID
+//                + " = " + id, null);
+//    }
+
+    public void deleteWorkout(String week) {
+        database.delete(MySQLiteHelper.TABLE_WORKOUT, MySQLiteHelper.COLUMN_DAYOFWEEK
+                + " = '" + week + "'", null);
     }
 
     public List<Workout> getAllWorkouts() {
@@ -68,6 +73,26 @@ public class WorkoutDataSource {
             Workout workout = cursorToWorkout(cursor);
             workouts.add(workout);
             cursor.moveToNext();
+        }
+        // make sure to close the cursor
+        cursor.close();
+        return workouts;
+    }
+
+    public List<String> getAllWorkoutDays() {
+        List<String> workouts = new ArrayList<String>();
+
+        String selectQuery = "SELECT DISTINCT " + MySQLiteHelper.COLUMN_DAYOFWEEK + " FROM " + MySQLiteHelper.TABLE_WORKOUT + ";";
+
+        Cursor cursor = database.rawQuery(selectQuery, null);
+
+        if (cursor != null){
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                String exercise = cursor.getString(cursor.getColumnIndex("day_week"));
+                workouts.add(exercise);
+                cursor.moveToNext();
+            }
         }
         // make sure to close the cursor
         cursor.close();

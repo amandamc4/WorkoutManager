@@ -87,6 +87,11 @@ public class WorkoutExerciseDataSource {
         return workouts;
     }
 
+    public void deleteWorkoutExercise(String week) {
+        database.delete(MySQLiteHelper.TABLE_WORKOUTEXERCISE, MySQLiteHelper.COLUMN_DAYOFWEEK
+                + " = '" + week + "'", null);
+    }
+
 
 //    private WorkoutExercise cursorToWorkoutExercise(Cursor cursor) {
 //        WorkoutExercise workoutExercise = new WorkoutExercise();
