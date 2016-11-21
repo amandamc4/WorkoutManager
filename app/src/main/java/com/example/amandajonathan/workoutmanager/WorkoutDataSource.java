@@ -62,6 +62,10 @@ public class WorkoutDataSource {
                 + " = '" + week + "'", null);
     }
 
+    public void clearAll() {
+        database.delete(MySQLiteHelper.TABLE_WORKOUT, null, null);
+    }
+
     public List<Workout> getAllWorkouts() {
         List<Workout> workouts = new ArrayList<Workout>();
 

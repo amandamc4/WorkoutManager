@@ -9,14 +9,14 @@
         android:layout_height="wrap_content"
         android:weightSum="1">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Day of the week"
-        android:id="@+id/dayWeek"
-        android:layout_marginTop="10dp"
-        android:textSize="25dp"
-        android:layout_marginLeft="5dp" />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/weekSpinner"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="0.47"
+            android:paddingRight="0dp" />
 
         <ImageButton
             android:id="@+id/editWorkout"
@@ -25,8 +25,7 @@
             android:src="@drawable/pencilicon"
             android:onClick="editWorkout"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="120dp" />
+            android:layout_marginLeft="140dp" />
 
     </LinearLayout>
 
@@ -52,15 +51,39 @@
             android:src="@drawable/trashicon"
             android:onClick="deleteWorkout"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="123dp" />
+            android:layout_marginLeft="100dp" />
 
     </LinearLayout>
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="410dp"
+        android:layout_height="331dp"
         android:id="@+id/exerciseList"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp" />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add New Workout"
+        android:id="@+id/newWorkout"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:onClick="addNewWorkout"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear All"
+        android:id="@+id/clearAll"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="35dp"
+        android:layout_weight="0.77"
+        android:onClick="clearAll"/>
+        </LinearLayout>
+
 </LinearLayout>

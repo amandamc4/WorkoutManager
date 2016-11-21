@@ -91,6 +91,10 @@ public class WorkoutExerciseDataSource {
         database.update(MySQLiteHelper.TABLE_WORKOUTEXERCISE, newValues, "_exercise_id = " + exeId + " AND day_week = '" + week + "'", null);
     }
 
+    public void clearAll() {
+        database.delete(MySQLiteHelper.TABLE_WORKOUTEXERCISE, null, null);
+    }
+
 //    private WorkoutExercise cursorToWorkoutExercise(Cursor cursor) {
 //        WorkoutExercise workoutExercise = new WorkoutExercise();
 //        workoutExercise.setId(cursor.getLong(0));

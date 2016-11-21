@@ -42,6 +42,7 @@ public class AddExercises extends Activity  {
     private int request_Code = 1;
     private String weekDay;
     private String workoutDescription;
+    private ExerciseDataSource datasource;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,9 @@ public class AddExercises extends Activity  {
         if (requestCode == request_Code) {
             if (resultCode == RESULT_OK) {
 
+                datasource = new ExerciseDataSource(this);
+                datasource.open();
+
                 String result = data.getStringExtra( "response" );
 
                 try {
@@ -68,7 +72,6 @@ public class AddExercises extends Activity  {
 
                     exerciseName =  new String[jsonArray.length()];
                     exerciseDescription =  new String[jsonArray.length()];
-                    //Log.i("INFO", jsonArray.toString());
 
                     for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -76,13 +79,19 @@ public class AddExercises extends Activity  {
 
                         exerciseName[i] = jsonObject2.getString("name");
                         exerciseDescription[i] = jsonObject2.getString("description");
-
-                        //Log.d( "JSON", exerciseName[i] );
-                        //Log.d( "JSON", exerciseDescription);
                     } // end for
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                }
+
+                int count = datasource.isTableEmpty();
+
+                if(count == 0){
+                    for(int i =0; i<exerciseName.length; i++){
+                        Exercise exercise = null;
+                        exercise = datasource.createExercise(exerciseName[i], exerciseDescription[i]);
+                    }
                 }
 
                 exerciseNameCheck = new boolean[exerciseName.length];
@@ -101,7 +110,7 @@ public class AddExercises extends Activity  {
                         startActivity(exerciseInfo);
 
                     }
-                });
+                }); // closes OnItemClickListener
             }
         }
     } // Closes onActivityResult
@@ -122,7 +131,6 @@ public class AddExercises extends Activity  {
             }
         }
 
-
         Intent editWorkout = new Intent("com.example.amandajonathan.workoutmanager.EditWorkout");
         editWorkout.putExtra("weekday", weekDay );
         editWorkout.putExtra("workoutDescription", workoutDescription );
@@ -142,7 +150,6 @@ public class AddExercises extends Activity  {
 
         @Override
         public int getCount() {
-            //return exerciseName.length;
             return exerciseName.length;
         }
 

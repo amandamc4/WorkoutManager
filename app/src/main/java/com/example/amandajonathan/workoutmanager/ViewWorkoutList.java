@@ -5,11 +5,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import java.util.List;
 
@@ -27,7 +29,8 @@ public class ViewWorkoutList extends AppCompatActivity {
     private TextView weekdayText;
     private TextView descriptText;
     List<String> daysAvailable;
-    int delete = 0;
+    private Spinner dropdown;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,22 +42,41 @@ public class ViewWorkoutList extends AppCompatActivity {
 
         workoutdatasource = new WorkoutDataSource(this);
         workoutdatasource.open();
-
+        dropdown = (Spinner) findViewById(R.id.daysWeek_spinner);
 
         Intent intent = getIntent();
-        weekDay = intent.getStringExtra("weekday"); //MAYBE CHANGE
-        weekdayText = (TextView) findViewById(R.id.dayWeek);
+        weekDay = intent.getStringExtra("weekday");
+        dropdown = (Spinner) findViewById(R.id.weekSpinner);
 
         daysAvailable = workoutdatasource.getAllWorkoutDays();
 
-        if(weekDay == ""){
-            weekDay = daysAvailable.get(0);
-        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, daysAvailable);
 
-        List<WorkoutExercise> workouts = workexedatasource.getAllExercisesByDayOfWeek(weekDay);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dropdown.setAdapter(adapter);
+
+        int spinnerPosition = adapter.getPosition(weekDay);
+        dropdown.setSelection(spinnerPosition, false);
+
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int index = parent.getSelectedItemPosition();
+                updateActivity(daysAvailable.get(index));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+            }
+        }); // Closes onItemSelected
+
+        List<WorkoutExercise> workouts;
+
+        workouts = workexedatasource.getAllExercisesByDayOfWeek(weekDay);
+
 
         descriptText = (TextView) findViewById(R.id.description);
-        weekdayText.setText(weekDay);
         descriptText.setText(workouts.get(0).getWorkoutDescription());
 
         listView = (ListView) findViewById(R.id.exerciseList);
@@ -63,12 +85,16 @@ public class ViewWorkoutList extends AppCompatActivity {
 
     } // closes onCreate
 
-    public void updateActivity(){
-        weekDay = daysAvailable.get(0);
+    public void updateActivity(String week){
+        if(week.equals("")){
+            weekDay = daysAvailable.get(0);
+        }
+        else{
+            weekDay = week;
+        }
         List<WorkoutExercise> workouts = workexedatasource.getAllExercisesByDayOfWeek(weekDay);
 
         descriptText = (TextView) findViewById(R.id.description);
-        weekdayText.setText(weekDay);
         descriptText.setText(workouts.get(0).getWorkoutDescription());
 
         listView = (ListView) findViewById(R.id.exerciseList);
@@ -87,8 +113,7 @@ public class ViewWorkoutList extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_workout:
-                Intent intent = new Intent(this, ViewWorkoutList.class);
-                startActivity(intent);
+                updateActivity("");
                 return true;
             case R.id.menu_exercises:
                 Intent intent2 = new Intent(this, ViewExercises.class);
@@ -109,7 +134,7 @@ public class ViewWorkoutList extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         workoutdatasource.deleteWorkout(weekDay);
                         workexedatasource.deleteWorkoutExercise(weekDay);
-                        updateActivity();
+                        updateActivity("");
                     }
                 });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "CANCEL",
@@ -126,6 +151,33 @@ public class ViewWorkoutList extends AppCompatActivity {
         editIntent.putExtra("weekday", weekDay);
         editIntent.putExtra("comingFromView", "yes");
         startActivity(editIntent);
+    }
+
+    public void addNewWorkout(View view) {
+        Intent addDayWeek = new Intent("com.example.amandajonathan.workoutmanager.AddDayWeek");
+        startActivity( addDayWeek );
+    }
+
+    public void clearAll(View view) {
+        AlertDialog alertDialog = new AlertDialog.Builder(ViewWorkoutList.this).create();
+        alertDialog.setTitle("Clear All");
+        alertDialog.setMessage("Are you sure you want to delete all the workouts?");
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        workoutdatasource.clearAll();
+                        workexedatasource.clearAll();
+                        Intent addNewWorkout = new Intent("com.example.amandajonathan.workoutmanager.MainActivity");
+                        startActivity(addNewWorkout);
+                    }
+                });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "CANCEL",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 
 

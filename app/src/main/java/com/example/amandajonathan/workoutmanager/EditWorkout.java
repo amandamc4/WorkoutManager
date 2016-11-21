@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.app.AlertDialog;
@@ -27,6 +28,7 @@ public class EditWorkout extends Activity {
     private EditListAdapter listAdapter;
     List<WorkoutExercise> workouts;
     String isFromView = "";
+
 
 
     @Override
@@ -53,12 +55,16 @@ public class EditWorkout extends Activity {
         TextView textView = (TextView) findViewById(R.id.textViewWeekDay);
         textView.setText(weekDay);
 
+        Button addNew = (Button) findViewById(R.id.addAnother);
+
+
         listView = (ListView) findViewById(R.id.editExercises);
 
         if(isFromView != null){
             if(isFromView.equalsIgnoreCase("yes")) {
                 workouts = workexedatasource.getAllExercisesByDayOfWeek(weekDay);
                 listAdapter = new EditListAdapter(this, workouts);
+                addNew.setVisibility(View.INVISIBLE);
             }
         }
         else{
@@ -115,10 +121,10 @@ public class EditWorkout extends Activity {
                 }
             }
 
+            Intent viewWorkout = new Intent("com.example.amandajonathan.workoutmanager.ViewWorkoutList");
+            viewWorkout.putExtra("weekday", weekDay );
+            startActivity(viewWorkout);
         } // close outside else
-        Intent viewWorkout = new Intent("com.example.amandajonathan.workoutmanager.ViewWorkoutList");
-        viewWorkout.putExtra("weekday", weekDay );
-        startActivity(viewWorkout);
     }//close saveWorkout
 
     public void addAnotherDay(View view) {
@@ -148,7 +154,6 @@ public class EditWorkout extends Activity {
             alertDialog.show();
         }
         else{
-
             Date date = new Date();
             String dates = date.toString();
             Workout workout = null;
@@ -158,10 +163,9 @@ public class EditWorkout extends Activity {
                 long exeId = exedatasource.getExerciseByName(exercises[i]);
                 workexedatasource.createWorkoutExercise(exeId, workout.getId(), String.valueOf(listAdapter.reps[i]), listAdapter.weights[i], exercises[i], workout.getWorkoutDay(), workout.getWorkoutDescription(), workout.getCreateDate());
             }
+            Intent addWeekDay = new Intent("com.example.amandajonathan.workoutmanager.AddDayWeek");
+            startActivity(addWeekDay);
         }
-        Intent addWeekDay = new Intent("com.example.amandajonathan.workoutmanager.AddDayWeek");
-        startActivity(addWeekDay);
+
     }
-
-
 } //close Class

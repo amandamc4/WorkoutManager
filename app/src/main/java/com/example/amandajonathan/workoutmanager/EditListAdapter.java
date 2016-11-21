@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.List;
@@ -30,9 +31,9 @@ public class EditListAdapter extends BaseAdapter {
     public class EditListViewHolder {
 
         TextView exerciseName ;
-        Button addReps;
+        ImageButton addReps;
         EditText rep ;
-        Button subtractReps;
+        ImageButton subtractReps;
         EditText weight;
         int ref;
     }
@@ -87,9 +88,9 @@ public class EditListAdapter extends BaseAdapter {
             row = layoutInflater.inflate(R.layout.edit_exercise_listview, parent, false);
             listViewHolder = new EditListViewHolder();
             listViewHolder.exerciseName = (TextView) row.findViewById(R.id.exerciseName);
-            listViewHolder.addReps = (Button) row.findViewById(R.id.addReps);
+            listViewHolder.addReps = (ImageButton) row.findViewById(R.id.addReps);
             listViewHolder.rep = (EditText) row.findViewById(R.id.reps);
-            listViewHolder.subtractReps = (Button) row.findViewById(R.id.subtractReps);
+            listViewHolder.subtractReps = (ImageButton) row.findViewById(R.id.subtractReps);
             listViewHolder.weight = (EditText) row.findViewById(R.id.weight);
             row.setTag(listViewHolder);
         } else {

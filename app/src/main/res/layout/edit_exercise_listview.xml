@@ -16,13 +16,14 @@
         android:layout_marginLeft="20dp" />
 
 
-        <Button
+        <ImageButton
             android:id="@+id/addReps"
             android:layout_width="55dp"
             android:layout_height="46dp"
             android:text="+"
             android:textSize="30dp"
             android:onClick="addRep"
+            android:src="@drawable/addicon"
             android:layout_below="@+id/exerciseName"
             android:layout_alignLeft="@+id/exerciseName"
             android:layout_marginTop="15dp"
@@ -39,13 +40,14 @@
             android:textAlignment="center"
             android:inputType="number" />
 
-        <Button
+        <ImageButton
             android:id="@+id/subtractReps"
-            android:layout_width="57dp"
-            android:layout_height="50dp"
+            android:layout_width="55dp"
+            android:layout_height="46dp"
             android:text="-"
             android:textSize="50dp"
             android:onClick="subtractRep"
+            android:src="@drawable/minusicon"
             android:layout_below="@+id/exerciseName"
             android:layout_toRightOf="@+id/reps"
             android:layout_marginTop="15dp"
