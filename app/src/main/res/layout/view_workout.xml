@@ -7,15 +7,14 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal" android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="1">
+        >
 
         <Spinner
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:id="@+id/weekSpinner"
             android:layout_marginTop="15dp"
             android:layout_marginRight="5dp"
-            android:layout_weight="0.47"
             android:paddingRight="0dp" />
 
         <ImageButton
@@ -24,15 +23,14 @@
             android:layout_height="wrap_content"
             android:src="@drawable/pencilicon"
             android:onClick="editWorkout"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="140dp" />
+            android:layout_marginLeft="170dp" />
 
     </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal" android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="1">
+        >
 
     <TextView
         android:layout_width="171dp"
@@ -42,7 +40,8 @@
         android:id="@+id/description"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp"
-        android:layout_weight="0.14" />
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimaryDark" />
 
         <ImageButton
             android:id="@+id/deleteWorkout"
@@ -73,7 +72,9 @@
         android:id="@+id/newWorkout"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="10dp"
-        android:onClick="addNewWorkout"/>
+        android:onClick="addNewWorkout"
+        android:background="@android:color/holo_blue_light"
+        android:layout_weight="0.19" />
 
     <Button
         android:layout_width="wrap_content"
@@ -83,7 +84,8 @@
         android:layout_marginTop="15dp"
         android:layout_marginLeft="35dp"
         android:layout_weight="0.77"
-        android:onClick="clearAll"/>
+        android:onClick="clearAll"
+        android:background="@android:color/holo_blue_light" />
         </LinearLayout>
 
 </LinearLayout>

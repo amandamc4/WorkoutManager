@@ -10,28 +10,61 @@
         android:id="@+id/exerciseName"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="15dp"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
 
     <TextView
-        android:layout_width="105dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/weight"
-        android:textSize="15dp"
-        android:layout_marginTop="15dp"
+        android:text="Reps"
+        android:id="@+id/repsLabel"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_marginLeft="15dp" />
 
     <TextView
-        android:layout_width="179dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Reps"
+    android:id="@+id/reps"
+        android:layout_marginLeft="15dp"
+    android:textSize="18dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/background_floating_material_dark" />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weight"
+            android:id="@+id/weightLabel"
+            android:textSize="18dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/reps"
+        android:text="Weight"
+        android:id="@+id/weight"
+        android:textSize="18dp"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="15dp"
-        android:textSize="15dp" />
-        </LinearLayout>
+        android:textColor="@color/background_floating_material_dark" />
+
+</LinearLayout>
+
 </LinearLayout>

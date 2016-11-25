@@ -17,5 +17,6 @@
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:onClick="onClick"/>
+        android:onClick="onClick"
+        android:background="@android:color/holo_blue_light" />
 </RelativeLayout>

@@ -13,12 +13,13 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
         android:textAlignment="center"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:textColor="@color/abc_tint_edittext" />
 
     <ListView
         android:id="@+id/editExercises"
         android:layout_width="match_parent"
-        android:layout_height="318dp"
+        android:layout_height="298dp"
         android:layout_marginTop="20dp" />
 
     <Button
@@ -28,7 +29,8 @@
         android:text="Add another Day"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:onClick="addAnotherDay"/>
+        android:onClick="addAnotherDay"
+        android:background="@android:color/holo_blue_light" />
 
     <Button
         android:id="@+id/saveWorkout"
@@ -37,5 +39,6 @@
         android:text="Finish"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:onClick="saveWorkout"/>
+        android:onClick="saveWorkout"
+        android:background="@android:color/holo_blue_light" />
 </LinearLayout>

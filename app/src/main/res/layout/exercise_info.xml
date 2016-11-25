@@ -13,8 +13,10 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
         android:textAlignment="center"
-        android:textSize="30dp"
-        android:textIsSelectable="false" />
+        android:textSize="22dp"
+        android:textIsSelectable="false"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="315dp"
@@ -24,8 +26,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="18dp"
         android:textAlignment="center"
-        android:textColor="#2940d3"
-        android:textSize="18dp"
+        android:textColor="@color/background_floating_material_dark"
+        android:textSize="20dp"
         android:text="Name" />
 
     <TextView
@@ -37,20 +39,41 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
         android:textAlignment="center"
-        android:textSize="30dp"
-        android:textIsSelectable="false" />
+        android:textSize="22dp"
+        android:textIsSelectable="false"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:layout_weight="0.06" />
+
+    <ScrollView
+        android:id="@+id/ScrollView01"
+        android:layout_height="150px"
+        android:layout_width="fill_parent"
+        android:layout_weight="0.46"
+        android:layout_marginTop="10dp">
 
     <TextView
-        android:layout_width="309dp"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Exercise Description"
         android:id="@+id/textViewDescription"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="5dp"
         android:textAlignment="center"
-        android:textColor="#2940d3"
-        android:textSize="18dp"
-        android:text="Description" />
+        android:textSize="20dp"
+        android:textIsSelectable="false"
+        android:textColor="@color/background_floating_material_dark"
+        android:layout_weight="0.36" />
+
+    </ScrollView>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp" />
 
 
 </LinearLayout>

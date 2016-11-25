@@ -19,6 +19,7 @@
         android:id="@+id/addSelected"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:onClick="addSelected"/>
+        android:onClick="addSelected"
+        android:background="@android:color/holo_blue_light" />
 
 </LinearLayout>

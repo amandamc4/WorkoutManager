@@ -57,6 +57,17 @@ public class WorkoutDataSource {
 //                + " = " + id, null);
 //    }
 
+    public int isTableEmpty() {
+        int count = 0;
+        String selectQuery = "SELECT COUNT(*) FROM " + MySQLiteHelper.TABLE_WORKOUT + "";
+
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        cursor.moveToFirst();
+        count = cursor.getInt(0);
+        cursor.close();
+        return count;
+    }
+
     public void deleteWorkout(String week) {
         database.delete(MySQLiteHelper.TABLE_WORKOUT, MySQLiteHelper.COLUMN_DAYOFWEEK
                 + " = '" + week + "'", null);
