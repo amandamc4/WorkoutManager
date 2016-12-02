@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,7 @@ public class ViewWorkoutList extends AppCompatActivity {
     private TextView descriptText;
     List<String> daysAvailable;
     private Spinner dropdown;
+    ArrayAdapter<String> adapter;
 
 
     @Override
@@ -42,7 +44,6 @@ public class ViewWorkoutList extends AppCompatActivity {
 
         workoutdatasource = new WorkoutDataSource(this);
         workoutdatasource.open();
-        dropdown = (Spinner) findViewById(R.id.daysWeek_spinner);
 
         Intent intent = getIntent();
         weekDay = intent.getStringExtra("weekday");
@@ -50,7 +51,7 @@ public class ViewWorkoutList extends AppCompatActivity {
 
         daysAvailable = workoutdatasource.getAllWorkoutDays();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, daysAvailable);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, daysAvailable);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdown.setAdapter(adapter);
@@ -86,8 +87,15 @@ public class ViewWorkoutList extends AppCompatActivity {
     } // closes onCreate
 
     public void updateActivity(String week){
-        if(week.equals("")){
-            weekDay = daysAvailable.get(0);
+        List<String> daysAvailable2 = workoutdatasource.getAllWorkoutDays();
+
+       if(week.equals("")){
+            weekDay = daysAvailable2.get(0);
+            adapter.clear();
+            adapter.addAll(daysAvailable2);
+            adapter.notifyDataSetChanged();
+            int spinnerPosition = adapter.getPosition(weekDay);
+            dropdown.setSelection(spinnerPosition, false);
         }
         else{
             weekDay = week;
@@ -134,7 +142,14 @@ public class ViewWorkoutList extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         workoutdatasource.deleteWorkout(weekDay);
                         workexedatasource.deleteWorkoutExercise(weekDay);
-                        updateActivity("");
+                        int size = workoutdatasource.isTableEmpty();
+                        if(size==0){
+                            Intent addNewWorkout = new Intent("com.example.amandajonathan.workoutmanager.MainActivity");
+                            startActivity(addNewWorkout);
+                        }
+                        else{
+                            updateActivity("");
+                        }
                     }
                 });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "CANCEL",
