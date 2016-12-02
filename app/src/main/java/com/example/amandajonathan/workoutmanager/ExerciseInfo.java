@@ -1,3 +1,7 @@
+// Amanda Marques and Jonathan Desmond
+// MAP524 Project - Workout Manager
+// 02/12/2016
+
 package com.example.amandajonathan.workoutmanager;
 
 import android.app.Activity;
@@ -9,6 +13,8 @@ import android.widget.TextView;
 /**
  * Created by Amanda on 10/26/2016.
  */
+
+/*This activity displays all of the available information when an exercise is selected from the list.*/
 public class ExerciseInfo extends Activity {
 
     ImageView myImage;
@@ -24,7 +30,6 @@ public class ExerciseInfo extends Activity {
 
         description = description.replaceAll("\\<p>", "");
         description = description.replaceAll("\\</p>", "");
-
 
         TextView textView = (TextView) findViewById(R.id.textViewName);
         textView.setText(name);
@@ -84,6 +89,5 @@ public class ExerciseInfo extends Activity {
                 myImage.setImageResource(R.drawable.workoutmanager);
                 return;
         }
-
     } // close onCre
 }

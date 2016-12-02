@@ -1,3 +1,7 @@
+// Amanda Marques and Jonathan Desmond
+// MAP524 Project - Workout Manager
+// 02/12/2016
+
 package com.example.amandajonathan.workoutmanager;
 
 /**
@@ -10,8 +14,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class MySQLiteHelper extends SQLiteOpenHelper {
+//SQLite Helper class which contains all the table information including columns and create statements
 
+public class MySQLiteHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "workoutdb.db";
     private static final int DATABASE_VERSION = 1;
@@ -36,8 +41,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_WORKOUTEXERCISEID = "_id";
     public static final String COLUMN_REPS = "reps";
     public static final String COLUMN_WEIGHT = "weight";
-
-
 
     //CREATE TABLE EXERCISE STATEMENT
     private static final String DATABASE_CREATE_EXERCISE = "CREATE TABLE "
@@ -67,7 +70,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase database) {

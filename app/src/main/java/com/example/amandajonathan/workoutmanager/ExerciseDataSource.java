@@ -1,3 +1,7 @@
+// Amanda Marques and Jonathan Desmond
+// MAP524 Project - Workout Manager
+// 02/12/2016
+
 package com.example.amandajonathan.workoutmanager;
 
 /**
@@ -12,6 +16,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+
+//database class for Exercises
+//contains all SQL queries necessary to retrieve from database and store into Exercise object
 
 public class ExerciseDataSource {
 

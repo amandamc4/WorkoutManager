@@ -1,3 +1,7 @@
+// Amanda Marques and Jonathan Desmond
+// MAP524 Project - Workout Manager
+// 02/12/2016
+
 package com.example.amandajonathan.workoutmanager;
 
 
@@ -24,12 +28,15 @@ import android.widget.CompoundButton;
 /**
  * Created by Amanda on 10/25/2016.
  */
+
+/*This activity allows the user to select one or more exercises to be included in their workout.
+* The user may either click the checkbox to select an exercise, or click the exercise name to view
+* a description of that exercise*/
 public class AddExercises extends Activity  {
 
     public String[] exerciseName;
     public String[] exerciseDescription;
     public String[] exercisesSelected;
-
     private ExerciseListAddAdapter mAdapter;
     private boolean[] exerciseNameCheck;
     private ListView listView;

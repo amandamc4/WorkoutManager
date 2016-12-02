@@ -1,3 +1,7 @@
+// Amanda Marques and Jonathan Desmond
+// MAP524 Project - Workout Manager
+// 02/12/2016
+
 package com.example.amandajonathan.workoutmanager;
 
 /**
@@ -13,6 +17,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+//Custom adapter for the exercise list
 public class ViewExerciseListAdapter extends BaseAdapter {
 
     private Context context;
@@ -23,7 +28,6 @@ public class ViewExerciseListAdapter extends BaseAdapter {
     public String description;
 
     public class WorkoutListViewHolder {
-
         TextView exerciseName ;
         TextView weight;
         TextView reps;
@@ -44,7 +48,6 @@ public class ViewExerciseListAdapter extends BaseAdapter {
             reps[i] = workouts.get(i).getReps();
             weights[i] = workouts.get(i).getWeight();
         }
-
     } // closes constructor
 
     @Override
@@ -56,7 +59,6 @@ public class ViewExerciseListAdapter extends BaseAdapter {
     public String getItem(int position) {
         return exercises[position];
     }
-
 
     @Override
     public long getItemId(int position) {
@@ -92,6 +94,5 @@ public class ViewExerciseListAdapter extends BaseAdapter {
         }
         return row;
     } // closes getView
-
 
 } // closes ViewExerciseListAdapter class

@@ -1,3 +1,7 @@
+// Amanda Marques and Jonathan Desmond
+// MAP524 Project - Workout Manager
+// 02/12/2016
+
 package com.example.amandajonathan.workoutmanager;
 
 import android.app.Activity;
@@ -13,6 +17,10 @@ import java.net.URL;
 /**
  * Created by Amanda on 10/26/2016.
  */
+
+//class to connect to the public api we are using:
+//https://wger.de/api/v2/
+
 public class WebApiConnect extends Activity {
 
     static final String API_URL = "https://wger.de/api/v2/exercise/?format=json&language=2";

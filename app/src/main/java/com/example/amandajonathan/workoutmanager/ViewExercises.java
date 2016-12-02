@@ -1,3 +1,7 @@
+// Amanda Marques and Jonathan Desmond
+// MAP524 Project - Workout Manager
+// 02/12/2016
+
 package com.example.amandajonathan.workoutmanager;
 
 import android.content.Intent;
@@ -16,6 +20,11 @@ import java.util.List;
 /**
  * Created by Amanda on 11/16/2016.
  */
+
+/*This activity is called when the user wishes to see the list of available exercises by clicking on
+the menu. When a user selects an exercise, they will be shown a new screen with more information
+about the selected exercise*/
+
 public class ViewExercises extends AppCompatActivity {
 
     private ExerciseDataSource datasource;
@@ -24,7 +33,6 @@ public class ViewExercises extends AppCompatActivity {
     private ListView listView;
     EditText editSearch;
     ArrayAdapter<String> adapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +89,5 @@ public class ViewExercises extends AppCompatActivity {
                 // TODO Auto-generated method stub
             }
         });
-
     }
 }

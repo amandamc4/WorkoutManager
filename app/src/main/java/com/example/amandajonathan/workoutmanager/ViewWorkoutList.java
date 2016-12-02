@@ -1,3 +1,7 @@
+// Amanda Marques and Jonathan Desmond
+// MAP524 Project - Workout Manager
+// 02/12/2016
+
 package com.example.amandajonathan.workoutmanager;
 
 import android.app.AlertDialog;
@@ -19,6 +23,12 @@ import java.util.List;
 /**
  * Created by Amanda on 11/11/2016.
  */
+
+/*This activity will be called when there are saved workouts in the database. It will display
+* a dropdown for the user to select the desired day of the week, and will display all of the
+* exercises for that particular workout day. From here, a user edit or delete the current workout,
+* or they may add a new workout or clear all of the workouts*/
+
 public class ViewWorkoutList extends AppCompatActivity {
 
     private WorkoutExerciseDataSource workexedatasource;
@@ -196,7 +206,5 @@ public class ViewWorkoutList extends AppCompatActivity {
                 });
         alertDialog.show();
     }
-
-
 
 } // closes ViewWorkoutList class

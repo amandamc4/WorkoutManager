@@ -1,3 +1,7 @@
+// Amanda Marques and Jonathan Desmond
+// MAP524 Project - Workout Manager
+// 02/12/2016
+
 package com.example.amandajonathan.workoutmanager;
 
 import android.app.Activity;
@@ -16,6 +20,9 @@ import java.util.List;
 /**
  * Created by Amanda on 10/26/2016.
  */
+
+/*This activity displays to the user all of the exercises they have selected, and for each exercise,
+* they can add the weight and reps they want.*/
 public class EditWorkout extends Activity {
 
     private ExerciseDataSource exedatasource;
@@ -88,6 +95,8 @@ public class EditWorkout extends Activity {
                 zeroReps += exercises[i] + ", ";
             }
         } // close For
+
+        //Validation to make sure reps are greater than zero
         if (isZeroRep == true) {
 
             AlertDialog alertDialog = new AlertDialog.Builder(EditWorkout.this).create();
@@ -127,6 +136,7 @@ public class EditWorkout extends Activity {
         } // close outside else
     }//close saveWorkout
 
+    //called if the user wants to add multiple workout days at once
     public void addAnotherDay(View view) {
         boolean isZeroRep = false;
         String zeroReps = "";

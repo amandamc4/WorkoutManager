@@ -1,9 +1,15 @@
+// Amanda Marques and Jonathan Desmond
+// MAP524 Project - Workout Manager
+// 02/12/2016
+
 package com.example.amandajonathan.workoutmanager;
 
 
 /**
  * Created by Amanda on 10/28/2016.
  */
+
+//Data model for exercise
 public class Exercise {
     private long id;
     private String exerciseName;
