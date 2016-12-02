@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +26,6 @@ public class ViewWorkoutList extends AppCompatActivity {
     private String weekDay ;
     private ViewExerciseListAdapter listAdapter;
     private ListView listView;
-    private TextView weekdayText;
     private TextView descriptText;
     List<String> daysAvailable;
     private Spinner dropdown;
@@ -145,7 +143,9 @@ public class ViewWorkoutList extends AppCompatActivity {
                         int size = workoutdatasource.isTableEmpty();
                         if(size==0){
                             Intent addNewWorkout = new Intent("com.example.amandajonathan.workoutmanager.MainActivity");
+                            addNewWorkout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(addNewWorkout);
+                            finish();
                         }
                         else{
                             updateActivity("");
@@ -183,7 +183,9 @@ public class ViewWorkoutList extends AppCompatActivity {
                         workoutdatasource.clearAll();
                         workexedatasource.clearAll();
                         Intent addNewWorkout = new Intent("com.example.amandajonathan.workoutmanager.MainActivity");
+                        addNewWorkout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(addNewWorkout);
+                        finish();
                     }
                 });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "CANCEL",

@@ -10,11 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import static com.example.amandajonathan.workoutmanager.R.array.dayOfWeek;
 
 /**

@@ -19,7 +19,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/descriptionText"
         android:hint="Description"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@color/colorPrimaryDark"
+        android:maxLength="100" />
 
     <Button
         android:layout_width="wrap_content"

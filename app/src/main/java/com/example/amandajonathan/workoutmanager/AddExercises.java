@@ -5,27 +5,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.app.Activity;
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.Filterable;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.BaseAdapter;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.CompoundButton;
-import android.widget.Filter;
 
-import java.util.ArrayList;
 
 /**
  * Created by Amanda on 10/25/2016.
@@ -123,21 +117,34 @@ public class AddExercises extends Activity  {
                 count ++;
             }
         }
-        exercisesSelected =  new String[count];
-        for(int i=0; i<exerciseNameCheck.length; i++){
-            if(exerciseNameCheck[i] == true){
-                exercisesSelected[j] = exerciseName[i];
-                j++;
+        if(count > 0){
+            exercisesSelected =  new String[count];
+            for(int i=0; i<exerciseNameCheck.length; i++){
+                if(exerciseNameCheck[i] == true){
+                    exercisesSelected[j] = exerciseName[i];
+                    j++;
+                }
             }
+
+            Intent editWorkout = new Intent("com.example.amandajonathan.workoutmanager.EditWorkout");
+            editWorkout.putExtra("weekday", weekDay );
+            editWorkout.putExtra("workoutDescription", workoutDescription );
+            editWorkout.putExtra("exercisesSelected", exercisesSelected);
+
+            startActivity( editWorkout );
         }
-
-        Intent editWorkout = new Intent("com.example.amandajonathan.workoutmanager.EditWorkout");
-        editWorkout.putExtra("weekday", weekDay );
-        editWorkout.putExtra("workoutDescription", workoutDescription );
-        editWorkout.putExtra("exercisesSelected", exercisesSelected);
-
-        startActivity( editWorkout );
-
+        else{
+            AlertDialog alertDialog = new AlertDialog.Builder(AddExercises.this).create();
+            alertDialog.setTitle("No Exercise selected");
+            alertDialog.setMessage("Please select at least one exercise");
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }
     }
 
     private static class ExercisesViewHolder {

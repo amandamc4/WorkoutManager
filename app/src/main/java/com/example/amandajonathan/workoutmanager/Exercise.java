@@ -1,6 +1,5 @@
 package com.example.amandajonathan.workoutmanager;
 
-import java.util.Date;
 
 /**
  * Created by Amanda on 10/28/2016.
